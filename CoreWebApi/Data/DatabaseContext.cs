@@ -15,6 +15,10 @@ namespace HotelListing22CoreWebApi.Data
 
         }
 
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Hotel> Hotels { get; set; }
+
+
     }//end class DatabaseContext:DbContext
 }//end namespace HotelListing22CoreWebApi.Data
 
