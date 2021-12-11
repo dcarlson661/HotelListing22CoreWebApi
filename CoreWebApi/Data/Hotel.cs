@@ -7,9 +7,8 @@
         public string Address { get; set; }
         public double Rating { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Country))]
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Country))]   
+        public int CountryId { get; set; } //must come first
         public Country Country { get; set; }
-        public int CountryId { get; set; }
-
     }
 }
