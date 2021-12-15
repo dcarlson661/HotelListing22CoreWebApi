@@ -1,5 +1,6 @@
 
 
+using HotelListing22CoreWebApi.Configurations;
 using HotelListing22CoreWebApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Serilog;  //add in the proj file <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
@@ -31,6 +32,8 @@ builder.Services.AddCors(o => {
         .AllowAnyMethod()
         .AllowAnyHeader());
 });
+
+builder.Services.AddAutoMapper(typeof(MapperInitilizer));
 
 //https://medium.com/executeautomation/asp-net-core-6-0-minimal-api-with-entity-framework-core-69d0c13ba9ab
 var cs = builder.Configuration.GetConnectionString("sqlConnection");
