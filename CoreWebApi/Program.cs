@@ -2,6 +2,8 @@
 
 using HotelListing22CoreWebApi.Configurations;
 using HotelListing22CoreWebApi.Data;
+using HotelListing22CoreWebApi.IRepository;
+using HotelListing22CoreWebApi.Repository;
 using Microsoft.EntityFrameworkCore;
 using Serilog;  //add in the proj file <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
 using Serilog.Events;
@@ -33,7 +35,24 @@ builder.Services.AddCors(o => {
         .AllowAnyHeader());
 });
 
+//Hello World.  This to test looking at git changes
+//auto mapper from a nuget package the link provided help understanding
+//https://www.pragimtech.com/blog/blazor/using-automapper-in-asp.net-core/
+//MapperInitilizer.cs in in configurations look a that to see what i map
 builder.Services.AddAutoMapper(typeof(MapperInitilizer));
+
+
+
+
+//Transient means everytime its needed AddScopped is for a period of time
+// AddSingleton is only one instance
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+
+builder.Services.AddControllers().AddNewtonsoftJson(op =>
+                op.SerializerSettings.ReferenceLoopHandling =
+                    Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
 
 //https://medium.com/executeautomation/asp-net-core-6-0-minimal-api-with-entity-framework-core-69d0c13ba9ab
 var cs = builder.Configuration.GetConnectionString("sqlConnection");

@@ -25,5 +25,7 @@ namespace HotelListing22CoreWebApi.Models
     {
         public int Id { get; set; }
         public IList<HotelDTO> Hotels { get; set; }
+
+        public string seeme = "seeme";
     }
 }
