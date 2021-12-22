@@ -24,17 +24,42 @@ namespace HotelListing22CoreWebApi.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetCountries()
         {
             try
             {
-                var countries = await _unitOfWork.Countries.GetAll();
+                var countries  = await _unitOfWork.Countries.GetAll();
                 var results    = _mapper.Map<IList<CountryDTO>>(countries);
-                return Ok(results);   
+                return           Ok(results);   
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Err GetContries {nameof(GetCountries)}");
+                _logger.LogError (ex, $"Err GetContries {nameof(GetCountries)}");
+                return StatusCode(500, "GetCountries Internal Server Error.");
+            }
+        }
+
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetCountry(int id)
+        {
+            try
+            {
+                //in genericrepository i have the signature for the get
+                //  async Task<T> IGenericRepository<T>.Get(Expression<Func<T, bool>> expression, List<string> includes)
+                //
+                //and that get expects an Expression (q => q.Id == id)
+                //     and a list of strings to be added to the query new List<string> {"Hotels"}
+                var country = await _unitOfWork.Countries.Get(q => q.Id == id, new List<string> {"Hotels"});
+                var result   = _mapper.Map<CountryDTO>(country);
+                return          Ok(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError (ex, $"Err GetContry {nameof(GetCountry)}");
                 return StatusCode(500, "GetCountries Internal Server Error.");
             }
         }

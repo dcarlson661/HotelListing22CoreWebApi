@@ -15,8 +15,9 @@ namespace HotelListing22CoreWebApi.Models
     }
 
     /// <summary>
-    /// CountryDTO gets Id and Hotels and because it inherits from CreateCountryDTO
-    ///    it gets Name and Shortname.  b/c Create doesn't need the Id because Id is database generated
+    /// CountryDTO inherits from CreateCountryDTO - just above
+    ///    that means the class CountryDTO properties include Id,Hotels,seeme AND Name and ShortName.
+    ///    CreateCountryDTO - just above - doesn't need the Id because Id is database generated
     ///    but to get the Hotels for a specific country you'll need the country Id for the lookup
     ///    
     /// Remember DTOs speak to other DTOs to

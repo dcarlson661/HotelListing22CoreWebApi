@@ -7,8 +7,10 @@ namespace HotelListing22CoreWebApi.Repository
 {
     /// <summary>
     /// this class uses the abstract prototype functions from the interface
-    ///  to provide the "real" code.  its generic because its going to be useds
+    ///  to provide the "real" code.  
+    ///  its generic because its going to be used 
     ///  for database operations for classes that represent different tables
+    ///  generic means i have a T inside lessthan greater than angle brackets
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class GenericRepository<T> : IGenericRepository<T> where T : class
@@ -36,6 +38,13 @@ namespace HotelListing22CoreWebApi.Repository
             _db.RemoveRange(entities);
         }
 
+        /// <summary>
+        /// called like this in the CountryController.cs
+        /// var countries = await _unitOfWork.Countries.Get(q => q.Id == id, new List<string> {"Hotels"});
+        /// </summary>
+        /// <param name="expression">q => q.Id == id            </param>
+        /// <param name="includes"  >new List<string> {"Hotels"}</param>
+        /// <returns></returns>
         async Task<T> IGenericRepository<T>.Get(Expression<Func<T, bool>> expression, List<string> includes)
         {
             //includes are for automatically filling in the ForeignKey defined in Hotel.cs
