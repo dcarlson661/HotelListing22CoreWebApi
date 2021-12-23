@@ -56,6 +56,7 @@ namespace HotelListing22CoreWebApi.Repository
                     query = query.Include(includeProperty);
                 }
             }
+            string q=query.ToQueryString();
             return await query.AsNoTracking().FirstOrDefaultAsync(expression);
         }
 
