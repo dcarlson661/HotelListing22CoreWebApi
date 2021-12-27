@@ -20,8 +20,9 @@ namespace HotelListing22CoreWebApi.Models
         public int CountryId { get; set; }
     }
 
-    public class HotelDTO : CreateHotelDTO
+    public class HotelDTO : CreateHotelDTO //inherit from CreateHotelDTO to get the properties of CreateHotelDTO
     {
+        //there are no functions coded here just properties (fields) name,address...Id and Country
         public int Id { get; set; }
         public CountryDTO Country { get; set; }
     }

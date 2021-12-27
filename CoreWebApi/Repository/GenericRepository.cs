@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 namespace HotelListing22CoreWebApi.Repository
 {
     /// <summary>
-    /// this class uses the abstract prototype functions from the interface
+    /// this class uses the abstract prototype functions for the interface
     ///  to provide the "real" code.  
     ///  its generic because its going to be used 
     ///  for database operations for classes that represent different tables

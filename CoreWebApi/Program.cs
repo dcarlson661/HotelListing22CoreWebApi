@@ -27,7 +27,9 @@ builder.Host.UseSerilog((ctx, lc) => lc
                   restrictedToMinimumLevel: LogEventLevel.Information
     ));
 
-
+//Cross - Origin Resource Sharing(CORS) is an HTTP - header based mechanism
+//that allows a server to indicate any origins (domain, scheme, or port)
+//other than its own from which a browser should permit loading resources.
 builder.Services.AddCors(o => {
     o.AddPolicy("AllowAll", builder =>
         builder.AllowAnyOrigin()
@@ -35,20 +37,18 @@ builder.Services.AddCors(o => {
         .AllowAnyHeader());
 });
 
-//Hello World.  This to test looking at git changes
 //auto mapper from a nuget package the link provided help understanding
 //https://www.pragimtech.com/blog/blazor/using-automapper-in-asp.net-core/
-//MapperInitilizer.cs in in configurations look a that to see what i map
+// mapping is required when we pass data between different layers of an application
+//MapperInitilizer.cs in in configurations look at that to see what i map
 builder.Services.AddAutoMapper(typeof(MapperInitilizer));
-
-
 
 
 //Transient means everytime its needed AddScopped is for a period of time
 // AddSingleton is only one instance
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-
+//this enables newtonsoft
 builder.Services.AddControllers().AddNewtonsoftJson(op =>
                 op.SerializerSettings.ReferenceLoopHandling =
                     Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -73,6 +73,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+Log.Information("Mapping Controllers");
 app.MapControllers();
 
 Log.Information("Application is starting");
