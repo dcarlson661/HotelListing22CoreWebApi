@@ -41,6 +41,7 @@ namespace HotelListing22CoreWebApi.Repository
         /// <summary>
         /// called like this in the CountryController.cs
         /// var countries = await _unitOfWork.Countries.Get(q => q.Id == id, new List<string> {"Hotels"});
+        /// var hotel     = await _unitOfWork.Hotels.Get   (q => q.Id == id, new List<string> { "Country" }); //"Country" very important here
         /// </summary>
         /// <param name="expression">q => q.Id == id            </param>
         /// <param name="includes"  >new List<string> {"Hotels"}</param>
