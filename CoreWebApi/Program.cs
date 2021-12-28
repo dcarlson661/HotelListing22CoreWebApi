@@ -1,5 +1,6 @@
 
 
+using HotelListing22CoreWebApi;
 using HotelListing22CoreWebApi.Configurations;
 using HotelListing22CoreWebApi.Data;
 using HotelListing22CoreWebApi.IRepository;
@@ -57,6 +58,9 @@ builder.Services.AddControllers().AddNewtonsoftJson(op =>
 //https://medium.com/executeautomation/asp-net-core-6-0-minimal-api-with-entity-framework-core-69d0c13ba9ab
 var cs = builder.Configuration.GetConnectionString("sqlConnection");
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(cs)) ;
+
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity(); //this is in ServiceExtensions.cs
 
 var app = builder.Build();
 

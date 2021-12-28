@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelListing22CoreWebApi.Data
 {
-    public class DatabaseContext :DbContext
+    //IdentityDbContext for minumum user identity fields 
+    // and is defined in class ApiUser.cs
+    public class DatabaseContext : IdentityDbContext<ApiUser>
     {
         // must add a constructor. you can type "ctor" and tap tap to have vs create it for you
         public DatabaseContext()
@@ -15,14 +18,13 @@ namespace HotelListing22CoreWebApi.Data
 
         }
 
-
-
         public DbSet<Country> Countries { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         
         //this override is to set some default data and its override is in DbContext
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            base.OnModelCreating(builder); //needed b/c i inherit from IdentityDbContext
             builder.Entity<Country>().HasData(
                 new Country
                 {
